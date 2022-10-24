@@ -7,5 +7,5 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = 'plugin-img-error'
+rootProject.name = 'plugin-lazyload'
 

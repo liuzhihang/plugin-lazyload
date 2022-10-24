@@ -20,10 +20,10 @@ jobs:
       - name: Build with Gradle
         run: |
           ./gradlew clean build -x test
-      - name: Archive plugin-img-error jar
+      - name: Archive plugin-lazyload jar
         uses: actions/upload-artifact@v2
         with:
-          name: plugin-img-error
+          name: plugin-lazyload
           path: |
             build/libs/*-plain.jar
           retention-days: 1

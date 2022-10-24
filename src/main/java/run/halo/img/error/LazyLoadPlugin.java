@@ -11,9 +11,9 @@ import run.halo.app.plugin.BasePlugin;
  * @date 2022/10/23
  */
 @Component
-public class ImgErrorPlugin extends BasePlugin {
+public class LazyLoadPlugin extends BasePlugin {
 
-    public ImgErrorPlugin(PluginWrapper wrapper) {
+    public LazyLoadPlugin(PluginWrapper wrapper) {
         super(wrapper);
     }
 

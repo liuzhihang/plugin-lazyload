@@ -1,7 +1,7 @@
 apiVersion: v1alpha1
 kind: Setting
 metadata:
-  name: plugin-img-error-settings
+  name: plugin-lazyload-settings
 spec:
   forms:
     - group: basic

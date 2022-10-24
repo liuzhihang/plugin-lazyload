@@ -6,12 +6,12 @@ spec:
   enabled: true
   version: 0.0.1-SNAPSHOT
   requires: "*"
-  author: halo-dev
+  author: liuzhihang
   logo: https://halo.run/logo
-  settingName: plugin-img-error-settings
-  configMapName: plugin-img-error-configMap
+  settingName: plugin-lazyload-settings
+  configMapName: plugin-lazyload-configMap
   homepage: https://github.com/halo-sigs/plugin-starter
-  displayName: "图片加载失败时展示错误图片"
-  description: "图片加载失败时展示错误图片"
+  displayName: "Halo2.0 对 vanilla-lazyload 的集成"
+  description: "Halo2.0 对 vanilla-lazyload 的集成，支持设置图片、动画、视频等延迟加载"
   license:
     - name: "MIT"

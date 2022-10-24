@@ -1,7 +1,7 @@
 apiVersion: plugin.halo.run/v1alpha1
 kind: ReverseProxy
 metadata:
-  name: plugin-img-error-reverse-proxy
+  name: plugin-lazyload-reverse-proxy
 rules:
   - path: /static/**
     file:

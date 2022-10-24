@@ -17,11 +17,11 @@ import run.halo.app.theme.dialect.TemplateHeadProcessor;
  * @date 2022/10/23
  */
 @Component
-public class ImgErrorHeadProcessor implements TemplateHeadProcessor {
+public class LazyLoadHeadProcessor implements TemplateHeadProcessor {
 
     private final SettingFetcher settingFetcher;
 
-    public ImgErrorHeadProcessor(SettingFetcher settingFetcher) {
+    public LazyLoadHeadProcessor(SettingFetcher settingFetcher) {
         this.settingFetcher = settingFetcher;
     }
 
