@@ -37,49 +37,11 @@ public class LazyLoadHeadProcessor implements TemplateHeadProcessor {
 
     private String highlightJsScript(Boolean jquery, String url) {
         return """
-                <script>
-                    document.addEventListener("DOMContentLoaded", async function () {
-                    
-                         if (%s) {
-                            
-                            await loadScript(`/plugins/PluginPrismJS/assets/static/jquery-3.6.1.min.js`);
-                            
-                            console.log("js");
-                         }
-                    
-                    });
-                    
-                    function loadScript(url) {
-                      return new Promise(function (resolve, reject) {
-                        const script = document.createElement("script");
-                        script.type = "text/javascript";
-                        script.src = url;
-                        script.onload = resolve;
-                        script.onerror = reject;
-                        document.head.appendChild(script);
-                      });
-                    }
-                    
-                    <!-- 图片 404 -->
-                    function imgError(url) {
-                      $("img").one("error", function () {
-                          $(this).attr("src", url);
-                      });
-                    }
-                    
-                    var url = %s;
-                    
-                    if (url !== null || url !== undefined || url !== '') {
-                        imgError(url);
-                    } else {
-                        imgError(`/plugins/PluginPrismJS/assets/static/404.gif`);
-                    }
-                    
-                    
-                    
-                </script>
+                <!-- PluginLazyLoad start -->
+                <script src="/plugins/PluginHighlightJS/assets/static/lazyload.min.js"></script>
+                
                                 
-                <!-- PluginPrismJS end -->
+                <!-- PluginLazyLoad end -->
                 """.formatted(jquery, url);
     }
 

@@ -6,7 +6,7 @@ plugins {
 }
 
 
-group 'run.halo.img.error'
+group 'run.halo.lazyload'
 version '0.0.1-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_17
 
