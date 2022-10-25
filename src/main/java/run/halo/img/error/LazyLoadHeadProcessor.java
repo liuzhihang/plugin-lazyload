@@ -1,6 +1,7 @@
 package run.halo.img.error;
 
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.context.ITemplateContext;
 import org.thymeleaf.model.IModel;
@@ -30,24 +31,66 @@ public class LazyLoadHeadProcessor implements TemplateHeadProcessor {
         return settingFetcher.fetch("basic", BasicConfig.class)
                 .map(config -> {
                     final IModelFactory modelFactory = context.getModelFactory();
-                    model.add(modelFactory.createText(highlightJsScript(config.getJquery(), config.getUrl())));
+
+                    String loadingImg = config.getLoadingImg();
+                    String errorImg = config.getErrorImg();
+
+                    if (StringUtils.isBlank(loadingImg)) {
+                        loadingImg = "/plugins/PluginHighlightJS/assets/static/loading.gif";
+                    }
+                    if (StringUtils.isBlank(errorImg)) {
+                        errorImg = "/plugins/PluginHighlightJS/assets/static/404.gif";
+                    }
+
+
+                    model.add(modelFactory.createText(lazyLoadScript(loadingImg, errorImg)));
                     return Mono.empty();
                 }).orElse(Mono.empty()).then();
     }
 
-    private String highlightJsScript(Boolean jquery, String url) {
+    /**
+     * 懒加载 js
+     *
+     * @param loadingImg 懒加载图
+     * @param errorImg 加载失败图
+     * @return
+     */
+    private String lazyLoadScript(String loadingImg, String errorImg) {
+        // language=html
         return """
                 <!-- PluginLazyLoad start -->
+                                
+                <script>
+                    const imgTags = document.getElementsByTagName("img");
+                    for (const imgTag of imgTags) {
+                        
+                        if (!imgTag.data-src) {
+                            imgTag.setAttribute("data-src", imgTag.src);
+                        }
+                        imgTag.src = "%s"
+                      
+                    }
+                </script>
                 <script src="/plugins/PluginHighlightJS/assets/static/lazyload.min.js"></script>
-                
+                       
+                <script>
+                    var lazyLoadInstance = new LazyLoad({
+                        elements_selector: "img",
+                        threshold: 0,
+                        callback_error: (img) => {
+                        img.setAttribute("srcset", "%s");
+                      }
+                    });
+                    lazyLoadInstance.update();
+                </script>    
                                 
                 <!-- PluginLazyLoad end -->
-                """.formatted(jquery, url);
+                """.formatted(loadingImg, errorImg);
     }
 
     @Data
     public static class BasicConfig {
-        Boolean jquery;
-        String url;
+        String loadingImg;
+        String errorImg;
     }
 }

@@ -7,18 +7,13 @@ spec:
     - group: basic
       label: 基本设置
       formSchema:
-        - $formkit: radio
-          name: jquery
-          label: 是否引入 jquery
-          value: false
-          options:
-            - label: 开启
-              value: true
-            - label: 关闭
-              value: false
-          help: "如果主题没有引入 jquery，需要在这里勾选开启"
         - $formkit: url
-          name: img_error
+          name: loadingImg
+          validation: "url"
+          label: 加载图片
+          help: "图片加载中时展示的图片，建议使用较低质量的图篇"
+        - $formkit: url
+          name: errorImg
+          validation: "url"
           label: 图片加载失败图
           help: 图片加载失败时显示的图片
-          placeholder: 请输入图片 url
