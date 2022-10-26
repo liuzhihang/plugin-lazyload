@@ -36,12 +36,11 @@ public class LazyLoadHeadProcessor implements TemplateHeadProcessor {
                     String errorImg = config.getErrorImg();
 
                     if (StringUtils.isBlank(loadingImg)) {
-                        loadingImg = "/plugins/PluginHighlightJS/assets/static/loading.gif";
+                        loadingImg = "/plugins/PluginLazyLoad/assets/static/loading.gif";
                     }
                     if (StringUtils.isBlank(errorImg)) {
-                        errorImg = "/plugins/PluginHighlightJS/assets/static/404.gif";
+                        errorImg = "/plugins/PluginLazyLoad/assets/static/404.gif";
                     }
-
 
                     model.add(modelFactory.createText(lazyLoadScript(loadingImg, errorImg)));
                     return Mono.empty();
@@ -52,37 +51,33 @@ public class LazyLoadHeadProcessor implements TemplateHeadProcessor {
      * 懒加载 js
      *
      * @param loadingImg 懒加载图
-     * @param errorImg 加载失败图
+     * @param errorImg   加载失败图
      * @return
      */
     private String lazyLoadScript(String loadingImg, String errorImg) {
         // language=html
         return """
                 <!-- PluginLazyLoad start -->
-                                
+                <script src="/plugins/PluginLazyLoad/assets/static/lazyload.min.js"></script> 
                 <script>
-                    const imgTags = document.getElementsByTagName("img");
-                    for (const imgTag of imgTags) {
-                        
-                        if (!imgTag.data-src) {
+                    document.addEventListener("DOMContentLoaded",  function () {
+                        const imgTags = document.getElementsByTagName("img");
+                        for (const imgTag of imgTags) {
                             imgTag.setAttribute("data-src", imgTag.src);
+                            imgTag.src = "%s"
+                          
                         }
-                        imgTag.src = "%s"
-                      
-                    }
+                        
+                        var lazyLoadInstance = new LazyLoad({
+                            elements_selector: "img",
+                            threshold: 0,
+                            callback_error: (img) => {
+                                img.setAttribute("srcset", "%s");
+                            }
+                        });
+                        lazyLoadInstance.update();
+                    })
                 </script>
-                <script src="/plugins/PluginHighlightJS/assets/static/lazyload.min.js"></script>
-                       
-                <script>
-                    var lazyLoadInstance = new LazyLoad({
-                        elements_selector: "img",
-                        threshold: 0,
-                        callback_error: (img) => {
-                        img.setAttribute("srcset", "%s");
-                      }
-                    });
-                    lazyLoadInstance.update();
-                </script>    
                                 
                 <!-- PluginLazyLoad end -->
                 """.formatted(loadingImg, errorImg);

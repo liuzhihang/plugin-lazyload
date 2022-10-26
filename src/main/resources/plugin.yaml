@@ -1,7 +1,7 @@
 apiVersion: plugin.halo.run/v1alpha1
 kind: Plugin
 metadata:
-  name: PluginImgError
+  name: PluginLazyLoad
 spec:
   enabled: true
   version: 0.0.1-SNAPSHOT
@@ -10,8 +10,8 @@ spec:
   logo: https://halo.run/logo
   settingName: plugin-lazyload-settings
   configMapName: plugin-lazyload-configMap
-  homepage: https://github.com/halo-sigs/plugin-starter
-  displayName: "Halo2.0 对 vanilla-lazyload 的集成"
+  homepage: https://github.com/liuzhihang/plugin-lazyload
+  displayName: "vanilla-lazyload 懒加载"
   description: "Halo2.0 对 vanilla-lazyload 的集成，支持设置图片、动画、视频等延迟加载"
   license:
     - name: "MIT"
