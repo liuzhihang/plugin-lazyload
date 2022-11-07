@@ -6,9 +6,7 @@ plugins {
 }
 
 
-group 'run.halo.lazyload'
-version '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_17
+group 'run.liuzhihang.lazyload'
 
 repositories {
     maven { url 'https://repo.spring.io/milestone' }
