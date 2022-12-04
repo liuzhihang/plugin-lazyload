@@ -4,9 +4,11 @@ metadata:
   name: PluginLazyLoad
 spec:
   enabled: true
-  version: 0.0.1-SNAPSHOT
+  version: 1.0.0
   requires: "*"
-  author: liuzhihang
+  author:
+    name: liuzhihang
+    website: https://github.com/liuzhihang
   logo: https://halo.run/logo
   settingName: plugin-lazyload-settings
   configMapName: plugin-lazyload-configMap
